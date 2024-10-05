@@ -1,0 +1,30 @@
+{
+  "home": "Home",
+
+  "contactUs": "Contact Us",
+  "login": "Login",
+  "notSpecified": "N/A",
+  "shipmentCreated": "shipmentCreated",
+
+  "ticketCreated": "Ticket Created",
+  "packageReceived": "Package Received",
+  "inTransit": "In Transit",
+  "deliveryFailed": "Delivery Failed",
+  "notYetShipped": "Not Yet Shipped",
+  "availableForPickup": "Available for Pickup",
+  "waitingForCustomerAction": "Waiting for Customer Action",
+  "cancelled": "Cancelled",
+  "outForDelivery": "Out for Delivery",
+  "deliveredToSender": "Delivered to Sender",
+  "delivered": "Delivered",
+  "branch": "Branch",
+  "date": "Date",
+  "time": "Time",
+  "details": "Details",
+  "noUpdates": "No shipment updates available.",
+  "problemReport": "Is there a problem with your shipment?",
+  "reportProblem": "Report the Problem",
+  "describeProblem": "Describe the problem...",
+  "submit": "Submit",
+  "selectTracking": "Select Tracking Number:"
+}
