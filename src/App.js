@@ -1,4 +1,4 @@
-// src/App.js
+
 import React, { useState } from 'react';
 import TrackingComponent from './components/TrackingComponent';
 import { TrackingProvider } from './context/TrackingContext';
@@ -6,7 +6,7 @@ import './i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-    const [language, setLanguage] = useState('en'); // Default language: English
+    const [language, setLanguage] = useState('en'); 
 
     const handleLanguageSwitch = (lang) => {
         setLanguage(lang);

@@ -7,13 +7,12 @@ import { useTranslation } from 'react-i18next';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TrackingComponent = ({ language, onLanguageChange }) => {
-    const { t } = useTranslation(); // Initialize translation function
+    const { t } = useTranslation();
     const [selectedTrackingNumber, setSelectedTrackingNumber] = useState('84043113');
     const [shipmentData, setShipmentData] = useState(null);
     const [problemReporting, setProblemReporting] = useState(false);
     const [problemDescription, setProblemDescription] = useState('');
 
-    // Fetch shipment data based on tracking number
     useEffect(() => {
         if (selectedTrackingNumber) {
             axios
@@ -39,45 +38,31 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
         const deliveredIndex = events.findIndex(event => event.state === 'DELIVERED');
         const outForDeliveryIndex = events.findIndex(event => event.state === 'OUT_FOR_DELIVERY');
         let lastValidIndex = deliveredIndex >= 0 ? deliveredIndex : (outForDeliveryIndex >= 0 ? outForDeliveryIndex : events.length - 1);
-        const totalSteps = 4; // Shipment Created, Package Received, Out for Delivery, Delivered
+        const totalSteps = 4;
 
         return ((lastValidIndex + 1) / totalSteps) * 100; 
     };
 
     const translateState = (state) => {
         switch (state) {
-            case 'TICKET_CREATED':
-                return t('ticketCreated');
-            case 'PACKAGE_RECEIVED':
-                return t('packageReceived');
-            case 'IN_TRANSIT':
-                return t('inTransit');
-            case 'DELIVERY_FAILED':
-                return t('deliveryFailed');
-            case 'NOT_YET_SHIPPED':
-                return t('notYetShipped');
-            case 'AVAILABLE_FOR_PICKUP':
-                return t('availableForPickup');
-            case 'WAITING_FOR_CUSTOMER_ACTION':
-                return t('waitingForCustomerAction');
-            case 'CANCELLED':
-                return t('cancelled');
-            case 'OUT_FOR_DELIVERY':
-                return t('outForDelivery');
-            case 'DELIVERED_TO_SENDER':
-                return t('deliveredToSender');
-            case 'DELIVERED':
-                return t('delivered');
-            case 'N/A':
-                return t('NA'); // Add translation for N/A
-            default:
-                return state; // Fallback to the original state if not found
+            case 'TICKET_CREATED': return t('ticketCreated');
+            case 'PACKAGE_RECEIVED': return t('packageReceived');
+            case 'IN_TRANSIT': return t('inTransit');
+            case 'DELIVERY_FAILED': return t('deliveryFailed');
+            case 'NOT_YET_SHIPPED': return t('notYetShipped');
+            case 'AVAILABLE_FOR_PICKUP': return t('availableForPickup');
+            case 'WAITING_FOR_CUSTOMER_ACTION': return t('waitingForCustomerAction');
+            case 'CANCELLED': return t('cancelled');
+            case 'OUT_FOR_DELIVERY': return t('outForDelivery');
+            case 'DELIVERED_TO_SENDER': return t('deliveredToSender');
+            case 'DELIVERED': return t('delivered');
+            case 'N/A': return t('NA');
+            default: return state;
         }
     };
 
     return (
         <div className="container-fluid mt-5" style={{ fontFamily: 'Cairo, sans-serif' }}>
-            {/* Full-width Navigation Bar */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-danger w-100">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
@@ -103,7 +88,6 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                 </div>
             </nav>
 
-            {/* Tracking Number Dropdown */}
             <div className="my-4">
                 <label htmlFor="trackingNumber" className="form-label">{t('selectTracking')}</label>
                 <select
@@ -118,7 +102,6 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                 </select>
             </div>
 
-            {/* Progress Bar for Shipment Stages */}
             <div className="my-4">
                 <div className="progress">
                     <div
@@ -132,7 +115,6 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                 </div>
             </div>
 
-            {/* Progress Icons */}
             <div className="row text-center mb-4">
                 <div className="col">
                     <div className={`progress-icon bg-${shipmentData?.TransitEvents[0]?.state ? 'danger' : 'secondary'} text-white rounded-circle d-flex align-items-center justify-content-center`} style={{ width: '50px', height: '50px', margin: '0 auto' }}>
@@ -160,7 +142,6 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                 </div>
             </div>
 
-            {/* Shipment Details Table */}
             <div className="table-responsive">
                 <table className="table table-bordered">
                     <thead className="thead-light">
@@ -178,7 +159,7 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                                     <td>{event.hub || t('NA')}</td>
                                     <td>{new Date(event.timestamp).toLocaleDateString()}</td>
                                     <td>{new Date(event.timestamp).toLocaleTimeString()}</td>
-                                    <td>{translateState(event.state)}</td> {/* Use the translation function here */}
+                                    <td>{translateState(event.state)}</td>
                                 </tr>
                             ))
                         ) : (
@@ -190,7 +171,6 @@ const TrackingComponent = ({ language, onLanguageChange }) => {
                 </table>
             </div>
 
-            {/* Problem Reporting Section */}
             <div className="card mt-4 p-3">
                 <h5>{t('problemReport')}</h5>
                 <button className="btn btn-danger mt-2" onClick={toggleProblemReporting}>{t('reportProblem')}</button>
